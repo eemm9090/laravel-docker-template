@@ -8,10 +8,16 @@ use App\Todo;
 
 class TodoController extends Controller
 {
+    private $todo;
+
+    public function __construct(Todo $todo)
+    {
+        $this->todo = $todo;
+    }
+
     public function index()
     {
-        $todo = new Todo();//todoモデルをインスタンス化
-        $todos = $todo->all();//allメソッドで全件取得→返り値：配列捜査に特化したcollectionインスタンス
+        $todos = $this->todo->all();//allメソッドで全件取得→返り値：配列捜査に特化したcollectionインスタンス
 
         return view('todo.index', ['todos' => $todos]);//controller→bladeへデータを渡す
     }
@@ -25,17 +31,15 @@ class TodoController extends Controller
     {
         $inputs = $request->all();//個別ではなく一括で取得
 
-        $todo = new Todo();
-        $todo->fill($inputs);//todoインスタンスの各プロパティに一括代入
-        $todo->save();//saveメソッドでDBに保存(INSERT文)
+        $this->todo->fill($inputs);//todoインスタンスの各プロパティに一括代入
+        $this->todo->save();//saveメソッドでDBに保存(INSERT文)
 
         return redirect()->route('todo.index');//リダイレクト
     }
 
     public function show($id)//route関数の第二引数に渡されたルートパラメータを$idという変数で引数に渡している
     {
-        $model = new Todo();
-        $todo = $model->find($id);//findメソッドで指定のidデータを取得
+        $todo = $this->todo->find($id);//findメソッドで指定のidデータを取得
 
         return view('todo.show', ['todo' => $todo]);
     }
