@@ -6,7 +6,7 @@
         <div class="card-header">ToDo作成</div>
         <div class="card-body">
           <form method="POST" action="{{ route('todo.store') }}">
-            @csrf
+            @csrf{{-- laravelでは記述するだけで対策ができ、生成されたトークンを含むinputタグを送信することで、検証も自動で行ってくれる --}}
             <div class="form-group row">
               <label for="name" class="col-md-4 col-form-label text-md-right">ToDo入力</label>
               <div class="col-md-6">

@@ -10,10 +10,10 @@ class TodoController extends Controller
 {
     public function index()
     {
-        $todo = new Todo();
-        $todos = $todo->all();
+        $todo = new Todo();//todoモデルをインスタンス化
+        $todos = $todo->all();//allメソッドで全件取得→返り値：配列捜査に特化したcollectionインスタンス
 
-        return view('todo.index', ['todos' => $todos]);
+        return view('todo.index', ['todos' => $todos]);//controller→bladeへデータを渡す
     }
 
     public function create()
@@ -23,14 +23,21 @@ class TodoController extends Controller
 
     public function store(Request $request)
     {
-        $inputs = $request->all();
+        $inputs = $request->all();//個別ではなく一括で取得
 
         $todo = new Todo();
-        $todo->user_id = Auth::id();
-        $todo->fill($inputs);
-        $todo->save();
+        $todo->fill($inputs);//todoインスタンスの各プロパティに一括代入
+        $todo->save();//saveメソッドでDBに保存(INSERT文)
 
-        return redirect()->route('todo.index');
+        return redirect()->route('todo.index');//リダイレクト
     }
-    
+
+    public function show($id)//route関数の第二引数に渡されたルートパラメータを$idという変数で引数に渡している
+    {
+        $model = new Todo();
+        $todo = $model->find($id);//findメソッドで指定のidデータを取得
+
+        return view('todo.show', ['todo' => $todo]);
+    }
+
 }

@@ -10,9 +10,11 @@
           ToDo一覧
         </div>
         <div class="list-group list-group-flush">
-          @foreach ($todos as $todo)
+          @foreach ($todos as $todo){{-- ディレクティブを利用してforeach文を短縮記述している --}}
             <div class="d-flex align-items-center p-2">
-              <span class="col-9">{{ $todo->content }}</span>
+                <span class="col-9">{{ $todo->content }}</span>{{-- ->でカラム値を取得している --}}
+                <a href="{{ route('todo.show', $todo->id) }}" class="btn btn-info ml-3">詳細</a>
+                {{-- route関数の第二引数にはルートパラメータを指定している --}}
             </div>
           @endforeach
         </div>

@@ -22,7 +22,7 @@ SELECT * FROM todos;
 
 ### index.blade.phpの$todos・$todoに代入されているものは何か
 - $todos：TodoController.phpファイルに定義されている'$todos = $todo->all();'が代入されている
-- $todo：$todosで取得した配列のキーが代入されている
+- $todo：todoクラスのインスタンスが代入されている
 
 
 ## Todo作成機能
