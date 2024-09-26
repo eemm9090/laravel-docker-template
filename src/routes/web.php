@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/todo', 'TodoController@index')->name('todo.index');
-Route::get('/tasks/create', 'TodoController@create')->name('todo.create');
+Route::get('/todo/create', 'TodoController@create')->name('todo.create');
 Route::get('/todo/{id}', 'TodoController@show')->name('todo.show');
 Route::get('/todo/{id}/edit', 'TodoController@edit')->name('todo.edit');
 
@@ -26,3 +26,4 @@ Route::put('/todo/{id}', 'TodoController@update')->name('todo.update');
 
 Route::post('/todo', 'TodoController@store')->name('todo.store');
 
+Route::delete('/todo{id}', 'TodoController@delete')->name('todo.delete');
